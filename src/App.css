@@ -1,0 +1,22 @@
+main {
+  display: grid;
+  grid-template-areas:
+    'sidebar history history'
+    'sidebar history history'
+    'sidebar input-area input-area';
+  padding: 10px;
+  grid-template-columns: 20% auto auto;
+  grid-template-rows: auto auto 20%;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.history {
+  grid-area: history;
+}
+
+.input-area {
+  grid-area: input-area;
+}
