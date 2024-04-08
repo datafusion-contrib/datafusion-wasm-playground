@@ -8,7 +8,7 @@ DataFusion Playground
 
 Playground of [Apache Arrow DataFusion](https://github.com/apache/arrow-datafusion) with [WebAssembly](https://webassembly.org). In the early experimental stage as my side project.
 
-🌱 Live Demo: https://waynexia.github.io/datafusion-playground/
+🌱 Live Demo: https://datafusion-contrib.github.io/datafusion-wasm-playground/
 
 ## Features
 
