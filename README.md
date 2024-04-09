@@ -29,6 +29,14 @@ CREATE EXTERNAL TABLE test STORED AS PARQUET
 LOCATION 's3://path-to-your.parquet';
 ```
 
+Create an external table from HTTP parquet file:
+
+```sql
+CREATE EXTERNAL TABLE lineitem
+STORED AS PARQUET
+LOCATION 'https://shell.duckdb.org/data/tpch/0_01/parquet/lineitem.parquet';
+```
+
 Explain a query:
 
 ```sql
