@@ -17,7 +17,7 @@ export function CloudConfig() {
   return (
     <>
       <div className="">
-        <text className="italic c-gray">Make sure the CORS permission is configured properly in your cloud storage provider</text>
+        <p className="italic c-gray">Make sure the CORS permission is configured properly in your cloud storage provider</p>
         <div >
           <h2 className="text-center">AWS S3</h2>
           <TextInput
