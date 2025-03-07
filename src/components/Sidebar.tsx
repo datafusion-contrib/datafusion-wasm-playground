@@ -5,7 +5,6 @@ import { CloudConfig } from "./CloudConfig";
 
 // unresolved problem:
 // - icon is not rounded
-// - active tab acon is not blue
 
 const mainTabData = [
   { icon: "i-tabler-info-circle", label: 'About' },
@@ -16,7 +15,7 @@ const mainTabData = [
 
 const activeTabAtom = atom("About")
 
-function switchTab() {
+function SwitchTab() {
   const activeTab = useAtomValue(activeTabAtom)
   switch (activeTab) {
     case "About": return <About />
@@ -38,7 +37,7 @@ export function Sidebar() {
     >
       <UnstyledButton
         onClick={() => setActiveTab(tab.label)}
-        className={"size-7 rounded-5 flex flex-items-center flex-justify-center " + tab.label === activeTab ? " c-blue-5 bg-blue-1" : " hover:bg-gray-2"}
+        className={"size-7 rounded-5 flex flex-items-center flex-justify-center " + (tab.label === activeTab ? " c-blue-5 bg-blue-1" : " hover:bg-gray-2")}
         data-active={tab.label === activeTab || undefined}
       >
         <div className={tab.icon + " m-1 rounded"} style={{ width: rem(22), height: rem(22) }} />
@@ -62,7 +61,7 @@ export function Sidebar() {
           </Title>
 
           <div className="p2">
-            {switchTab()}
+            {SwitchTab()}
           </div>
 
         </div>
