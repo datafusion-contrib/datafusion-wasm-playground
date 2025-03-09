@@ -5,6 +5,9 @@ import { dfCtx } from "../App"
 
 export const sqlAtom = atom('')
 
+const COMMAND_KEY = '⌘';
+const CTRL_KEY = "Ctrl"
+
 export function InputArea() {
   const [sql, setSql] = useAtom(sqlAtom)
   const setHistoryList = useSetAtom(historyListAtom)
@@ -14,7 +17,7 @@ export function InputArea() {
   }
 
   const handleCtrlEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && e.ctrlKey) {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       doQuery();
 
       e.currentTarget.value = ''
@@ -31,6 +34,8 @@ export function InputArea() {
     console.log('doQuery' + sql)
   }
 
+  const isMac = navigator.userAgent.indexOf('Mac OS X') != -1;
+
   return (
     < Textarea
       className="m-4"
@@ -39,7 +44,7 @@ export function InputArea() {
       minRows={4}
       maxRows={7}
       autosize={true}
-      description="Ctrl + Enter to execute"
+      description={`${isMac ? COMMAND_KEY : CTRL_KEY} + Enter to execute`}
       placeholder="SQL here"
       onChange={handleChange}
       onKeyDown={handleCtrlEnter}
