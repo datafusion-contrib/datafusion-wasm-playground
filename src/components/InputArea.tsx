@@ -1,5 +1,6 @@
 import { Textarea } from "@mantine/core"
-import { atom, useAtom, useSetAtom } from "jotai"
+import { atom, useAtom } from "jotai"
+import { useState } from "react";
 import { historyListAtom, } from "./History"
 import { dfCtx } from "../App"
 
@@ -10,7 +11,8 @@ const CTRL_KEY = "Ctrl"
 
 export function InputArea() {
   const [sql, setSql] = useAtom(sqlAtom)
-  const setHistoryList = useSetAtom(historyListAtom)
+  const [historyList, setHistoryList] = useAtom(historyListAtom);
+  const [historyCursor, setHistoryCursor] = useState(-1);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSql(e.currentTarget.value)
@@ -20,7 +22,27 @@ export function InputArea() {
     if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       doQuery();
 
-      e.currentTarget.value = ''
+      setSql("");
+      setHistoryCursor(-1);
+    }
+    if (e.key === "ArrowUp") {
+      const newHistoryCursor = Math.min(
+        historyCursor + 1,
+        historyList.length - 2
+      );
+      setHistoryCursor(newHistoryCursor);
+
+      setSql(historyList[newHistoryCursor].query);
+    }
+    if (e.key === "ArrowDown") {
+      const newHistoryCursor = Math.max(historyCursor - 1, -1);
+      setHistoryCursor(newHistoryCursor);
+
+      if (newHistoryCursor === -1) {
+        setSql("");
+      } else {
+        setSql(historyList[newHistoryCursor].query);
+      }
     }
   }
 
@@ -47,6 +69,7 @@ export function InputArea() {
       description={`${isMac ? COMMAND_KEY : CTRL_KEY} + Enter to execute`}
       placeholder="SQL here"
       onChange={handleChange}
+      value={sql}
       onKeyDown={handleCtrlEnter}
     />)
 }
